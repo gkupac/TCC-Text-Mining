@@ -34,13 +34,9 @@ def process_text(text_pdf):
     # Remove stop words em português e remove pontuações
     filtered_tokens = [token for token in tokens if token not in stopwords.words('portuguese') and not re.search(r'[.,;:!?()\[\]{}"\'’“”]', token)]
 
-    # Stemming
-    stemmer = PorterStemmer()
-    stemmed_tokens = [stemmer.stem(token) for token in filtered_tokens]
-
     # Lematização
     lemmatizer = WordNetLemmatizer()
-    lemmatized_tokens = [lemmatizer.lemmatize(token) for token in stemmed_tokens]
+    lemmatized_tokens = [lemmatizer.lemmatize(token) for token in filtered_tokens]
 
     # Converte os tokens para string
     processed_text = ' '.join(lemmatized_tokens)
@@ -57,7 +53,7 @@ def generate_wordcloud(texts):
         plt.show()
 
 
-folder_path_pdf = "C:\\Users\\Lorena Vasconcellos\\Documents\\Desenvolvimento\\TCC\\TCC-Text-Mining\\pdfs"
+folder_path_pdf = "C:\\Users\\loren\\Documents\\Desenvolvimento\\Faculdade\\TCC\\TCC-Text-Mining\\pdfs"
 
 texts = pdf_reader(folder_path_pdf)
 
